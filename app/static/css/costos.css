@@ -1,0 +1,17 @@
+.form-group {
+    margin-bottom: 5px;
+}
+
+.input-group-text {
+    padding: 3px 7px;
+}
+
+.form-control {
+    font-size: 12px;
+    padding: 2px 5px;
+}
+
+.btn-clean {
+    font-size: 12px;
+    padding: 3px 10px;
+}
