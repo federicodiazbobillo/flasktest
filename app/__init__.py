@@ -29,12 +29,5 @@ def create_app():
     app.register_blueprint(envios_controller.bp)
     app.register_blueprint(ver_guias_controller.bp)
 
-    # Inyectar el estado del token en todas las plantillas
-    @app.context_processor
-    def inject_token_status():
-        # Importar aquí para evitar problemas de importación circular
-        from app.models.meli_access import MeliAccess  
-        token_status = "Token activo" if MeliAccess.is_token_active() else "Token inactivo"
-        return dict(token_status=token_status)
 
     return app
