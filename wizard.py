@@ -103,12 +103,15 @@ while True:
                         connection.execute(text(f"DROP TABLE IF EXISTS {table};"))
                     except OperationalError as e:
                         print(f"Error al eliminar la tabla {table}: {e}")
+                # Crear nueva estructura de tablas
                 connection.execute(text("""
-                    CREATE TABLE IF NOT EXISTS meli_access (
-                        app_id BIGINT DEFAULT NULL,
-                        secret_key VARCHAR(50) CHARACTER SET armscii8 COLLATE armscii8_bin DEFAULT NULL,
-                        refresh_token VARCHAR(50) COLLATE armscii8_bin DEFAULT NULL
-                    ) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
+                    CREATE TABLE IF NOT EXISTS inicio (
+                        title VARCHAR(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                """))
+                connection.execute(text("""
+                    INSERT INTO inicio (title) VALUES
+                    ('Hola, soy una aplicacion de Flask funcional conectada a Mysql');
                 """))
                 print(f"Base de datos '{db_name}' lista para usarse.")
                 break
