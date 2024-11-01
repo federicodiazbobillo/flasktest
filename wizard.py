@@ -103,9 +103,10 @@ while True:
                         connection.execute(text(f"DROP TABLE IF EXISTS {table};"))
                     except OperationalError as e:
                         print(f"Error al eliminar la tabla {table}: {e}")
-                # Crear nueva estructura de tablas
+                # Crear nueva estructura de tablas con 'id' como clave primaria
                 connection.execute(text("""
                     CREATE TABLE IF NOT EXISTS inicio (
+                        id INT AUTO_INCREMENT PRIMARY KEY,
                         title VARCHAR(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
                 """))
