@@ -1,6 +1,9 @@
+from dotenv import load_dotenv
+import os
+
+# Cargar las variables de entorno desde .env
+load_dotenv()
 
 class Config:
-    SECRET_KEY = 'your_secret_key_here'
-    DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://fede:B9j3d18.01@localhost/libreria'
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}/{os.getenv('DB_NAME')}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
