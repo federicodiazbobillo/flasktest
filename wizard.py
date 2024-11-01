@@ -4,6 +4,7 @@ from sqlalchemy.exc import OperationalError, ProgrammingError
 import sys
 import termios
 import tty
+import subprocess
 
 def get_key():
     fd = sys.stdin.fileno()
@@ -83,7 +84,9 @@ while True:
             if confirm == '\x1b':
                 print("\nBackup omitido.")
             elif confirm == '\r' or confirm == '\n':
-                os.system(f"mysqldump -u {db_user} -p{db_password} -h {db_host} {db_name} > {db_name}_backup.sql")
+                backup_command = ["mysqldump", "-u", db_user, f"-p{db_password}", "-h", db_host, db_name]
+                with open(f"{db_name}_backup.sql", "w") as backup_file:
+                    subprocess.run(backup_command, stdout=backup_file)
                 print(f"Backup de la base de datos '{db_name}' guardado como {db_name}_backup.sql.")
             print(f"\033[38;5;214mLa información de la base de datos '{db_name}' será eliminada. ¿Está seguro que desea continuar? (Enter para continuar, Esc para salir):\033[0m")
             confirm = get_key()
