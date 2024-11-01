@@ -16,7 +16,7 @@ def get_key():
     return ch
 
 # Ruta a config.py en la estructura del proyecto clonado
-config_path = "./app/config.py"
+config_path = "app/config.py"
 
 # Intentar conectar al servidor de base de datos en un bucle
 while True:
