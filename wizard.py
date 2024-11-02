@@ -95,7 +95,11 @@ while True:
                 print("\nInstalación cancelada.")
                 exit(0)
             elif confirm == '\r' or confirm == '\n':
-                connection.execute(text(f"USE {db_name};"))
+                # Cambiar la conexión a la base de datos específica seleccionada
+                engine = create_engine(f"mysql+pymysql://{db_user}:{db_password}@{db_host}/{db_name}")
+                connection = engine.connect()
+
+                # Borrar todas las tablas si existen
                 result = connection.execute(text("SHOW TABLES;"))
                 tables = [row[0] for row in result]
                 for table in tables:
@@ -103,8 +107,8 @@ while True:
                         connection.execute(text(f"DROP TABLE IF EXISTS {table};"))
                     except OperationalError as e:
                         print(f"Error al eliminar la tabla {table}: {e}")
+
                 # Crear nueva estructura de tablas con 'id' como clave primaria
-                connection.execute(text(f"USE {db_name};"))  # Seleccionar la base de datos
                 connection.execute(text("""
                     CREATE TABLE IF NOT EXISTS inicio (
                         id INT AUTO_INCREMENT PRIMARY KEY,
