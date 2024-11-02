@@ -53,7 +53,7 @@ while True:
 
 # Obtener las bases de datos disponibles
 result = connection.execute(text("SHOW DATABASES;"))
-databases = [row[0] for row in result if row[0] not in ('mysql', 'performance_schema', 'information_schema')]
+databases = [row[0] for row in result if row[0] not in ('mysql', 'performance_schema', 'information_schema', 'sys')]
 
 # Listar opciones de bases de datos
 print("\nSeleccione una opción:")
