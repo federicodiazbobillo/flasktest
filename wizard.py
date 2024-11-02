@@ -119,7 +119,7 @@ while True:
                     transaction.execute(text("""
                         CREATE TABLE IF NOT EXISTS pid (
                             id INT PRIMARY KEY,
-                            pid VARCHAR(10)
+                            pid VARCHAR(50)
                         );
                     """))
                     transaction.execute(text("""
