@@ -17,8 +17,8 @@ def get_key():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
 
-# Ruta a .env en la estructura del entorno virtual
-env_path = "./.env"
+# Ruta a .env en la estructura del entorno virtual usando VENV_PATH
+env_path = os.path.join(os.getenv("VENV_PATH", "."), ".env")
 
 # Intentar conectar al servidor de base de datos en un bucle
 while True:
