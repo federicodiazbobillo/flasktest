@@ -117,6 +117,12 @@ while True:
                         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
                     """))
                     transaction.execute(text("""
+                        CREATE TABLE IF NOT EXISTS pid (
+                            id INT PRIMARY KEY,
+                            pid VARCHAR(10)
+                        );
+                    """))
+                    transaction.execute(text("""
                         INSERT INTO inicio (title) VALUES
                         ('Hola, soy una aplicacion de Flask funcional conectada a Mysql');
                     """))
