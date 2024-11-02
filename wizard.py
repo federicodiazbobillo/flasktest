@@ -104,6 +104,7 @@ while True:
                     except OperationalError as e:
                         print(f"Error al eliminar la tabla {table}: {e}")
                 # Crear nueva estructura de tablas con 'id' como clave primaria
+                connection.execute(text(f"USE {db_name};"))  # Seleccionar la base de datos
                 connection.execute(text("""
                     CREATE TABLE IF NOT EXISTS inicio (
                         id INT AUTO_INCREMENT PRIMARY KEY,
