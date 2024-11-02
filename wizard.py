@@ -109,16 +109,17 @@ while True:
                         print(f"Error al eliminar la tabla {table}: {e}")
 
                 # Crear nueva estructura de tablas con 'id' como clave primaria
-                connection.execute(text("""
-                    CREATE TABLE IF NOT EXISTS inicio (
-                        id INT AUTO_INCREMENT PRIMARY KEY,
-                        title VARCHAR(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
-                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-                """))
-                connection.execute(text("""
-                    INSERT INTO inicio (title) VALUES
-                    ('Hola, soy una aplicacion de Flask funcional conectada a Mysql');
-                """))
+                with engine.begin() as transaction:
+                    transaction.execute(text("""
+                        CREATE TABLE IF NOT EXISTS inicio (
+                            id INT AUTO_INCREMENT PRIMARY KEY,
+                            title VARCHAR(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+                        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                    """))
+                    transaction.execute(text("""
+                        INSERT INTO inicio (title) VALUES
+                        ('Hola, soy una aplicacion de Flask funcional conectada a Mysql');
+                    """))
                 print(f"Base de datos '{db_name}' lista para usarse.")
                 break
         except (IndexError, ValueError):
